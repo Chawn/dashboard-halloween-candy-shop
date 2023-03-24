@@ -58,9 +58,12 @@ const Dashboard = () => {
 						headers: { Authorization: `Bearer ${access_token}` },
 					}
 				);
+        let bestsellers = response.data.dashboard.bestsellers;
 
-				setBestsellers(response.data.dashboard.bestsellers);
-
+        // sort the array by totals in descending order
+        bestsellers.sort((a, b) => b.units - a.units);
+        setBestsellers(bestsellers);
+        
 				let arrChartDataWeek = [['id', '$']];
 				let arrChartDataYear = [['id', '$']];
 				let total_week = 0;
